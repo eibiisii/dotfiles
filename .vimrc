@@ -4,7 +4,7 @@
 set nocompatible
 filetype off
 
-set rtp+=~/.vim/vundle/
+set rtp+=~/.vim/vundle.git/
 call vundle#rc()
 filetype plugin on
 
@@ -14,6 +14,7 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/unite.vim'
 Bundle 'vim-scripts/python.vim'
+
 
 " vim-scripts上のプラグイン
 "Bundle 'smooth_scroll.vim'
