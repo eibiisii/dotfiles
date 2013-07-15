@@ -14,10 +14,11 @@ Bundle 'mattn/zencoding-vim'
 Bundle 'Shougo/neocomplcache'
 Bundle 'Shougo/unite.vim'
 Bundle 'vim-scripts/python.vim'
-
+Bundle 'JavaScript-syntax'
+Bundle 'itspriddle/vim-javascript-indent'
 
 " vim-scripts上のプラグイン
-"Bundle 'smooth_scroll.vim'
+Bundle 'smooth_scroll.vim'
 
 " 基本設定
 " ===================
@@ -30,7 +31,7 @@ set title
 " ルーラーの表示
 set ruler
 " バックアップ
-set backupdir=$HOME/vimbackup
+"set backupdir=$HOME/vimbackup
 " 対応括弧表示
 set showmatch
 " タブを常に表示
@@ -39,6 +40,13 @@ set showtabline=2
 set wildmenu
 " コマンドをステータスラインに表示
 set showcmd
+" カーソルキーで行末／行頭の移動可能に設定
+set whichwrap=b,s,[,],<,>
+"検索の時に大文字小文字を区別しない
+"ただし大文字小文字の両方が含まれている場合は大文字小文字を区別する
+set ignorecase
+set smartcase
+set laststatus=2
 
 " syntax color
 " =====================
@@ -52,6 +60,8 @@ let g:neocomplcache_enable_at_startup = 1
 "区切り補完有効化
 let g:neocomplcache_enable_underbar_completion = 1
 let g:neocomplcache_min_syntax_length = 3
+" 検索結果をハイライト
+set hlsearch
 
 " keymap
 " =====================
@@ -72,3 +82,31 @@ augroup END
 autocmd FileType python setl autoindent
 autocmd FileType python setl smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 autocmd FileType python setl tabstop=8 expandtab shiftwidth=4 softtabstop=4
+
+" perlテンプレート
+autocmd BufNewFile *.pl 0r $HOME/.vim/template/perl.txt
+
+"ステータスラインに文字コードやBOM、16進表示等表示
+"iconvが使用可能の場合、カーソル上の文字コードをエンコードに応じた表示にするFencB()を使用
+"""""""""""""""""""""""""""""""
+if has('iconv')
+  set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).(&bomb?':BOM':'').']['.&ff.']'}%=[0x%{FencB()}]\ (%v,%l)/%L%8P\ 
+else
+  set statusline=%<%f\ %m\ %r%h%w%{'['.(&fenc!=''?&fenc:&enc).(&bomb?':BOM':'').']['.&ff.']'}%=\ (%v,%l)/%L%8P\ 
+endif
+
+function! FencB()
+  let c = matchstr(getline('.'), '.', col('.') - 1)
+  let c = iconv(c, &enc, &fenc)
+  return s:Byte2hex(s:Str2byte(c))
+endfunction
+
+function! s:Str2byte(str)
+  return map(range(len(a:str)), 'char2nr(a:str[v:val])')
+endfunction
+
+function! s:Byte2hex(bytes)
+  return join(map(copy(a:bytes), 'printf("%02X", v:val)'), '')
+endfunction
+
+
