@@ -14,6 +14,11 @@ endif
 " originalrepos on github
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc'
+" カラースキーム
+" jellybeans
+NeoBundle 'nanotech/jellybeans.vim'
+" hybrid
+NeoBundle 'w0ng/vim-hybrid'
 " unite
 NeoBundle 'Shougo/unite.vim'
 " バッファ一覧
@@ -39,6 +44,7 @@ au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
 NeoBundle 'Shougo/neosnippet'
+NeoBundle "Shougo/neosnippet-snippets"
 
 " vimshell
 NeoBundle 'Shougo/vimshell'
@@ -184,7 +190,7 @@ set wrap
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
-colorscheme desert
+colorscheme hybrid
 " ステータスラインに表示する情報の指定
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
 " ステータスラインの色
