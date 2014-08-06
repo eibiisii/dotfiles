@@ -43,6 +43,8 @@ au FileType unite inoremap <silent> <buffer> <expr> <C-l> unite#do_action('vspli
 au FileType unite nnoremap <silent> <buffer> <ESC><ESC> q
 au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>q
 
+NeoBundle 'Shougo/neomru.vim'
+
 NeoBundle 'Shougo/neosnippet'
 NeoBundle "Shougo/neosnippet-snippets"
 
@@ -190,7 +192,7 @@ set wrap
 " 全角スペースの表示
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
 match ZenkakuSpace /　/
-colorscheme hybrid
+colorscheme jellybeans
 " ステータスラインに表示する情報の指定
 set statusline=%n\:%y%F\ \|%{(&fenc!=''?&fenc:&enc).'\|'.&ff.'\|'}%m%r%=
 " ステータスラインの色
@@ -218,8 +220,8 @@ set shiftwidth=4
 set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
-set fileencodings=ucs-bom,euc-jp,cp932,iso-2022-jp
-set fileencodings+=,ucs-2le,ucs-2,utf-8
+" set fileencodings=ucs-bom,euc-jp,cp932,iso-2022-jp
+" set fileencodings+=,ucs-2le,ucs-2,utf-8
 
 "----------------------------------------------------
 " オートコマンド
