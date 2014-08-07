@@ -17,6 +17,7 @@ NeoBundle 'Shougo/vimproc'
 " カラースキーム
 " jellybeans
 NeoBundle 'nanotech/jellybeans.vim'
+set t_Co=256
 " hybrid
 NeoBundle 'w0ng/vim-hybrid'
 " unite
