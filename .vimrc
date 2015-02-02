@@ -9,11 +9,18 @@ filetype off
 " neobundle
 if has('vim_starting')
   set runtimepath+=~/.vim/bundle/neobundle.vim
-  call neobundle#rc(expand('~/.vim/bundle/'))
+  call neobundle#begin(expand('~/.vim/bundle/'))
 endif
 " originalrepos on github
 NeoBundle 'Shougo/neobundle.vim'
-NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/vimproc', {
+  \ 'build' : {
+    \ 'windows' : 'make -f make_mingw32.mak',
+    \ 'cygwin' : 'make -f make_cygwin.mak',
+    \ 'mac' : 'make -f make_mac.mak',
+    \ 'unix' : 'make -f make_unix.mak',
+  \ },
+\ }
 " カラースキーム
 " jellybeans
 NeoBundle 'nanotech/jellybeans.vim'
@@ -110,6 +117,8 @@ NeoBundle 'project.tar.gz'
 autocmd BufAdd .vimprojects silent! %foldopen!
 
 ""NeoBundle 'https://bitbucket.org/kovisoft/slimv'
+
+call neobundle#end()
 
 filetype plugin indent on     " required!
 filetype indent on
